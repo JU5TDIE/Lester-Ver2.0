@@ -85,3 +85,22 @@ def right_symbols(img):
 	values.append(pixel_check(rightsymbol_length, rightsymbol_height_2, img, 2, RIGHT_SYMBOLS))
 
 	return values
+
+def calculate(a, b, c):
+	try:
+		for i in range(0, 6):
+			keys = []
+			keys.append(list(tuple(moves)[i]))
+
+			for z, x, v, n, k, l in keys:
+				if (a == b[z] * c[x] + b[v] * c[n] + b[k] * c[l]):
+					print(moves[tuple(moves)[i]])
+					for key in (moves[tuple(moves)[i]]):
+						keyboard.press_and_release(key)
+						if key == 's' or 'w':
+							time.sleep(0.025)
+						if key == 'return':
+							time.sleep(1.3)
+					raise NotImplementedError
+	except:
+		print('end')
