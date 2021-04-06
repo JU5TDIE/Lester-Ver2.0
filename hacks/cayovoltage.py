@@ -65,3 +65,23 @@ def pixel_check(x, y, img, maximum, dictionary):
 			hints.append(0)
 			
 	return dictionary[tuple(hints)]
+
+def objective_number(img):
+	value = (100 * (pixel_check(objectivenumber_length_0, objectivenumber_height, img, 7, DIGITS_LOOKUP))) + (10 * (pixel_check(objectivenumber_length_1, objectivenumber_height, img, 7, DIGITS_LOOKUP))) + pixel_check(objectivenumber_length_2, objectivenumber_height, img, 7, DIGITS_LOOKUP)
+	return value
+
+def left_numbers(img):
+	values = []
+	values.append(pixel_check(leftnumber_length, leftnumber_height_0, img, 7, DIGITS_LOOKUP))
+	values.append(pixel_check(leftnumber_length, leftnumber_height_1, img, 7, DIGITS_LOOKUP))
+	values.append(pixel_check(leftnumber_length, leftnumber_height_2, img, 7, DIGITS_LOOKUP))
+
+	return values
+
+def right_symbols(img):
+	values = []
+	values.append(pixel_check(rightsymbol_length, rightsymbol_height_0, img, 2, RIGHT_SYMBOLS))
+	values.append(pixel_check(rightsymbol_length, rightsymbol_height_1, img, 2, RIGHT_SYMBOLS))
+	values.append(pixel_check(rightsymbol_length, rightsymbol_height_2, img, 2, RIGHT_SYMBOLS))
+
+	return values
