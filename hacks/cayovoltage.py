@@ -104,3 +104,23 @@ def calculate(a, b, c):
 					raise NotImplementedError
 	except:
 		print('end')
+
+def main():
+	print('Cayo Voltage Hack')
+
+	im = ImageGrab.grab(bbox)
+	im.save('screenshot.png')
+
+	originalImage = cv2.imread('screenshot.png')
+	grayImage = cv2.cvtColor(originalImage, cv2.COLOR_BGR2GRAY)
+	(thresh, blackAndWhiteImage) = cv2.threshold(grayImage, 127, 255, cv2.THRESH_BINARY)
+
+	objectivenumber = objective_number(blackAndWhiteImage)
+	leftnumbers = left_numbers(blackAndWhiteImage)
+	rightnumbers = right_symbols(blackAndWhiteImage)
+
+	print(objectivenumber, leftnumbers, rightnumbers)
+
+	calculate(objectivenumber, leftnumbers, rightnumbers)
+
+	os.remove('screenshot.png')
