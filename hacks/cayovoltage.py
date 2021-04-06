@@ -25,12 +25,12 @@ RIGHT_SYMBOLS = {
 }
 
 moves = {
-	(0, 0, 1, 1, 2, 2): ['return', 'return', 'return', 'return', 'return', 'return'], # (1-1) + (2-2) + (3-3)
-	(0, 0, 1, 2, 2, 1): ['return', 'return', 'return', 's', 'return', 'return', 'return'], # (1-1) + (2-3) + (3-2)
-	(0, 1, 1, 0, 2, 2): ['return', 's', 'return', 'return', 'w', 'return', 'return', 'return'], #(1-2) + (2-1) + (3-3)
-	(0, 1, 1, 2, 2, 0): ['return', 's', 'return', 'return', 'return', 'return', 'return'], # (1-2) + (2-3) + (3-1)
-	(0, 2, 1, 0, 2, 1): ['return', 'w', 'return', 'return', 'w', 'return', 'return', 'return'], # (1-3) + (2-1) + (3-2)
-	(0, 2, 1, 1, 2, 0): ['return', 'w', 'return', 'return', 'return', 'return', 'return'] # (1-3) + (2-2) + (3-1) 
+	(0, 0, 1, 1, 2, 2): ['enter', 'return', 'enter', 'return', 'enter', 'return'], # (1-1) + (2-2) + (3-3)
+	(0, 0, 1, 2, 2, 1): ['enter', 'return', 'enter', 's', 'return', 'enter', 'return'], # (1-1) + (2-3) + (3-2)
+	(0, 1, 1, 0, 2, 2): ['enter', 's', 'return', 'enter', 'w', 'return', 'enter', 'return'], #(1-2) + (2-1) + (3-3)
+	(0, 1, 1, 2, 2, 0): ['enter', 's', 'return', 'enter', 'return', 'enter', 'return'], # (1-2) + (2-3) + (3-1)
+	(0, 2, 1, 0, 2, 1): ['enter', 'w', 'return', 'enter', 'w', 'return', 'enter', 'return'], # (1-3) + (2-1) + (3-2)
+	(0, 2, 1, 1, 2, 0): ['enter', 'w', 'return', 'enter', 'return', 'enter', 'return'] # (1-3) + (2-2) + (3-1) 
 }
 
 bbox = (0, 0, 1920, 1080)
@@ -97,7 +97,7 @@ def calculate(a, b, c):
 					print(moves[tuple(moves)[i]])
 					for key in (moves[tuple(moves)[i]]):
 						keyboard.press_and_release(key)
-						if key == 's' or 'w':
+						if key == 's' or 'w' or 'enter':
 							time.sleep(0.025)
 						if key == 'return':
 							time.sleep(1.3)
