@@ -52,3 +52,16 @@ rightsymbol_length = [1351, 1349] # right symbols have same length
 rightsymbol_height_0 = [305, 277] # first symbol
 rightsymbol_height_1 = [541, 513] # second symbol
 rightsymbol_height_2 = [775, 747] # third symbol
+
+def pixel_check(x, y, img, maximum, dictionary):
+	hints = []
+
+	for i in range(0, maximum):
+		pixel = img[y[i]:y[i] + 1, x[i]:x[i] + 1]
+
+		if np.mean(pixel):
+			hints.append(1)
+		else:
+			hints.append(0)
+			
+	return dictionary[tuple(hints)]
