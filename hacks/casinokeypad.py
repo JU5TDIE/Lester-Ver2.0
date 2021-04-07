@@ -88,3 +88,31 @@ def calculate(numbers):
             time.sleep(2.2)
 
     print('end')
+
+def main():
+    print('Casino Keypad Cracker')
+
+    screen = ImageGrab.grab(bbox)
+    screen.save('screenshot.png')
+
+    image = cv2.imread('screenshot.png')
+    hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+        
+    lower = np.array([50, 50, 50])
+    upper = np.array([96, 255, 255])
+        
+    mask = cv2.inRange(hsv, lower, upper)
+    mintimg = cv2.bitwise_and(image, image, mask= mask)
+
+    grayImage = cv2.cvtColor(mintimg, cv2.COLOR_BGR2GRAY)
+    (thresh, blackAndWhiteImage) = cv2.threshold(grayImage, 215, 255, cv2.THRESH_BINARY)
+
+    numbers = []
+
+    for a in range(0, 6):
+        numbers.append(dot_check(a, blackAndWhiteImage))
+    
+    check()
+    calculate(numbers)
+
+    os.remove('screenshot.png')
