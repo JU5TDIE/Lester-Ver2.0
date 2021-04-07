@@ -30,3 +30,16 @@ def dot_check(a, img):
             hint.append(0)
 
     return DIGITS_LOOKUP[tuple(hint)]
+
+def check():
+    while True:
+        screen = ImageGrab.grab(bbox)
+        grayImage = cv2.cvtColor(np.array(screen), cv2.COLOR_BGR2GRAY)
+        (thresh, blackAndWhiteImage) = cv2.threshold(grayImage, 215, 255, cv2.THRESH_BINARY)
+        crop_img = blackAndWhiteImage[92:92 + 1, 44:44 + 1]
+
+        if np.mean(crop_img) == 0:
+            keyboard.press_and_release('w')
+            time.sleep(0.025)
+        elif np.mean(crop_img) == 255:
+            break
