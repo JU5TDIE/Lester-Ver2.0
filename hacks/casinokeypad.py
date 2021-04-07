@@ -43,3 +43,48 @@ def check():
             time.sleep(0.025)
         elif np.mean(crop_img) == 255:
             break
+
+def calculate(numbers):
+    keyboardgo = []
+
+    for i in range(0, 6):
+        if i == 0:
+            if numbers[i] == 1:
+                keyboardgo.append('1')
+            elif numbers[i] == 2:
+                keyboardgo.append('s')
+            elif numbers[i] == 3:
+                keyboardgo.append('s')
+                keyboardgo.append('s')
+            elif numbers[i] == 4:
+                keyboardgo.append('s')
+                keyboardgo.append('s')
+                keyboardgo.append('s')
+            elif numbers[i] == 5:
+                keyboardgo.append('s')
+                keyboardgo.append('s')
+                keyboardgo.append('s')
+                keyboardgo.append('s')
+        if i > 0:
+            a = i - 1
+            if numbers[i] == numbers[a]:
+                keyboardgo.append('1')
+            elif numbers[i] < numbers[a]:
+                value = numbers[a] - numbers[i]
+                for i in range(0, value):
+                    keyboardgo.append('w')
+            elif numbers[i] > numbers[a]:
+                value = numbers[i] - numbers[a]
+                for i in range(0, value):
+                    keyboardgo.append('s')
+        keyboardgo.append('return')
+
+    print(keyboardgo)
+    for key in keyboardgo:
+        keyboard.press_and_release(key)
+        if key == 's' or 'w':
+            time.sleep(0.025)
+        if key == 'return':
+            time.sleep(2.2)
+
+    print('end')
