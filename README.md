@@ -1,7 +1,7 @@
 # Lester-VER2.0
 GTA Online Heist Hacking(Minigame) Macro
 
-The Source Codes of `Fingerprint Scanner` and `Retro Fingerprint Scanner` are from [HERE]('https://github.com/RedHeadEmile/GTA-V-Heist-Help')
+The Source Codes of `Fingerprint Scanner` and `Retro Fingerprint Scanner` are from [HERE](https://github.com/RedHeadEmile/GTA-V-Heist-Help)
 
 # Features
 - CLI
