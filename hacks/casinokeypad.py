@@ -1,4 +1,3 @@
-import os
 import cv2
 import time
 import keyboard
@@ -79,32 +78,31 @@ def calculate(numbers):
                     keyboardgo.append('s')
         keyboardgo.append('return')
 
-    print(keyboardgo)
+    print('-', keyboardgo)
     for key in keyboardgo:
         keyboard.press_and_release(key)
         if key == 's' or 'w':
             time.sleep(0.025)
         if key == 'return':
-            time.sleep(2.2)
+            time.sleep(1.95)
 
-    print('end')
+    print('[*] END')
+    print('=============================================')
 
 def main():
-    print('Casino Keypad Cracker')
+    print('[*] Casino Keypad Cracker')
 
-    screen = ImageGrab.grab(bbox)
-    screen.save('screenshot.png')
+    im = ImageGrab.grab(bbox)
 
-    image = cv2.imread('screenshot.png')
-    hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+    hsv = cv2.cvtColor(np.array(im), cv2.COLOR_RGB2HSV)
         
     lower = np.array([50, 50, 50])
     upper = np.array([96, 255, 255])
         
     mask = cv2.inRange(hsv, lower, upper)
-    mintimg = cv2.bitwise_and(image, image, mask= mask)
+    mintimg = cv2.bitwise_and(np.array(im), np.array(im), mask= mask)
 
-    grayImage = cv2.cvtColor(mintimg, cv2.COLOR_BGR2GRAY)
+    grayImage = cv2.cvtColor(mintimg, cv2.COLOR_RGB2GRAY)
     (thresh, blackAndWhiteImage) = cv2.threshold(grayImage, 215, 255, cv2.THRESH_BINARY)
 
     numbers = []
@@ -114,5 +112,3 @@ def main():
     
     check()
     calculate(numbers)
-
-    os.remove('screenshot.png')

@@ -1,4 +1,3 @@
-import os
 import cv2
 import time
 import keyboard
@@ -94,7 +93,7 @@ def calculate(a, b, c):
 
 			for z, x, v, n, k, l in keys:
 				if (a == b[z] * c[x] + b[v] * c[n] + b[k] * c[l]):
-					print(moves[tuple(moves)[i]])
+					print('-', moves[tuple(moves)[i]])
 					for key in (moves[tuple(moves)[i]]):
 						keyboard.press_and_release(key)
 						if key == 's' or 'w' or 'enter':
@@ -103,24 +102,21 @@ def calculate(a, b, c):
 							time.sleep(1.3)
 					raise NotImplementedError
 	except:
-		print('end')
+		print('[*] END')
+		print('=============================================')
 
 def main():
-	print('Cayo Voltage Hack')
+	print('[*] Cayo Voltage Hack')
 
 	im = ImageGrab.grab(bbox)
-	im.save('screenshot.png')
 
-	originalImage = cv2.imread('screenshot.png')
-	grayImage = cv2.cvtColor(originalImage, cv2.COLOR_BGR2GRAY)
+	grayImage = cv2.cvtColor(np.array(im), cv2.COLOR_RGB2GRAY)
 	(thresh, blackAndWhiteImage) = cv2.threshold(grayImage, 127, 255, cv2.THRESH_BINARY)
 
 	objectivenumber = objective_number(blackAndWhiteImage)
 	leftnumbers = left_numbers(blackAndWhiteImage)
 	rightnumbers = right_symbols(blackAndWhiteImage)
 
-	print(objectivenumber, leftnumbers, rightnumbers)
+	print('- ', objectivenumber, leftnumbers, rightnumbers)
 
 	calculate(objectivenumber, leftnumbers, rightnumbers)
-
-	os.remove('screenshot.png')
