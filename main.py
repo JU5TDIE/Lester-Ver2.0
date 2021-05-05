@@ -17,3 +17,37 @@ def check_window():
 			return True
 		
 		time.sleep(1)
+
+pressed = []
+def on_press(key):
+	if key in pressed:
+		return True
+	pressed.append(key)
+
+	try:
+		k = key.char
+	except:
+		k = key.name
+
+	if k == "f4":
+		return False
+
+	elif k == "f5":
+		thread = Thread(target = casinofingerprint.main)
+		thread.start()
+
+	elif k == "f6":
+		thread = Thread(target = casinokeypad.main)
+		thread.start()
+
+	elif k == "f7":
+		thread = Thread(target = cayofingerprint.main)
+		thread.start()
+
+	elif k == "f8":
+		thread = Thread(target = cayovoltage.main)
+		thread.start()
+
+def on_release(key):
+	if key in pressed:
+		pressed.remove(key)
