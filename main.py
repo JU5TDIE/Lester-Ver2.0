@@ -62,3 +62,14 @@ def on_press(key):
 def on_release(key):
 	if key in pressed:
 		pressed.remove(key)
+
+def main():
+	PrintBanner()
+
+	if check_window():
+		listener = pynput.keyboard.Listener(on_press = on_press, on_release = on_release)
+		listener.start()
+		listener.join()
+
+if __name__ == "__main__":
+	main()
