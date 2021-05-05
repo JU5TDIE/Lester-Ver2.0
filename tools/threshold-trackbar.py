@@ -7,8 +7,8 @@ cv2.namedWindow('binary')
 cv2.createTrackbar('threshold', 'binary', 0, 255, nothing)
 cv2.setTrackbarPos('threshold', 'binary', 127)
 
-img_color = cv2.imread('.png', cv2.IMREAD_COLOR)
-img_gray = cv2.cvtColor(img_color, cv2.COLOR_BGR2GRAY)
+img_color = Image.open('.png')
+img_gray = cv2.cvtColor(np.array(img_color), cv2.COLOR_RGB2GRAY)
 
 while True:
     low = cv2.getTrackbarPos('threshold', 'binary')
