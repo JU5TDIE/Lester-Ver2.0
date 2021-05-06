@@ -28,4 +28,15 @@ The Source Codes of `Fingerprint Scanner` and `Retro Fingerprint Scanner` are fr
 
 # Warning
 - `Python 3.8` is recommended version for this repository
+- If there are some issues or suggestions, write them on `Issues`
 - You must use `1920x1080` resolution, otherwise the script would make some errors.
+- On `Keypad Cracker`, you have to press `F6` on the latest pattern
+
+# Showcase
+[Fingerprint Scanner](https://youtu.be/3I9eYxjDiOk?t=7)
+
+[Keypad Cracker](https://youtu.be/3I9eYxjDiOk?t=44)
+
+[Retro Fingerprint Scanner](https://youtu.be/3I9eYxjDiOk?t=137)
+
+[Voltage Hack](https://youtu.be/3I9eYxjDiOk?t=177)
