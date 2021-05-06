@@ -14,6 +14,12 @@ def PrintBanner():
 ███████╗███████╗██████╔╝░░░██║░░░███████╗██║░░██║  ░░╚██╔╝░░███████╗██║░░██║  ███████╗██╗╚█████╔╝
 ╚══════╝╚══════╝╚═════╝░░░░╚═╝░░░╚══════╝╚═╝░░╚═╝  ░░░╚═╝░░░╚══════╝╚═╝░░╚═╝  ╚══════╝╚═╝░╚════╝░
                                                                                           ''')
+
+def PrintCredits():
+	print('''
+Made by JUSTDIE
+Special thanks to RedHeadEmile
+	''')																					
 	
 def check_window():
 	print('[*] Searching Grand Theft Auto V...')
@@ -65,6 +71,7 @@ def on_release(key):
 
 def main():
 	PrintBanner()
+	PrintCredits()
 
 	if check_window():
 		listener = pynput.keyboard.Listener(on_press = on_press, on_release = on_release)
