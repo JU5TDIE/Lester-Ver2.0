@@ -1,3 +1,4 @@
+import sys
 import time
 import pynput
 import win32gui
@@ -35,48 +36,37 @@ def check_window():
 		
 		time.sleep(1)
 
-pressed = []
-def on_press(key):
-	if key in pressed:
-		return True
-	pressed.append(key)
+def casino_fingerprint():
+	thread = Thread(target = casinofingerprint.main)
+	thread.start()
 
-	try:
-		k = key.char
-	except:
-		k = key.name
+def casino_keypad():
+	thread = Thread(target = casinokeypad.main)
+	thread.start()
 
-	if k == "f4":
-		return False
+def cayo_fingerprint():
+	thread = Thread(target = cayofingerprint.main)
+	thread.start()
 
-	elif k == "f5":
-		thread = Thread(target = casinofingerprint.main)
-		thread.start()
+def cayo_voltage():
+	thread = Thread(target = cayovoltage.main)
+	thread.start()
 
-	elif k == "f6":
-		thread = Thread(target = casinokeypad.main)
-		thread.start()
-
-	elif k == "f7":
-		thread = Thread(target = cayofingerprint.main)
-		thread.start()
-
-	elif k == "f8":
-		thread = Thread(target = cayovoltage.main)
-		thread.start()
-
-def on_release(key):
-	if key in pressed:
-		pressed.remove(key)
+def shutdown():
+	sys.exit()
 
 def main():
 	PrintBanner()
 	PrintCredits()
 
 	if check_window():
-		listener = pynput.keyboard.Listener(on_press = on_press, on_release = on_release)
-		listener.start()
-		listener.join()
+		with pynput.keyboard.GlobalHotKeys({
+				'<F4>': shutdown,
+                '<F5>': casino_fingerprint,
+                '<F6>': casino_keypad,
+                '<F7>': cayo_fingerprint,
+                '<F8>': cayo_voltage}) as h:
+			h.join()
 
 if __name__ == "__main__":
 	main()
