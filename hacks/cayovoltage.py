@@ -6,30 +6,30 @@ from PIL import ImageGrab
 
 DIGITS_LOOKUP = {
     (1, 1, 1, 0, 1, 1, 1): 0,
-	(0, 0, 1, 0, 0, 1, 0): 1,
-	(1, 0, 1, 1, 1, 0, 1): 2,
-	(1, 0, 1, 1, 0, 1, 1): 3,
-	(0, 1, 1, 1, 0, 1, 0): 4,
-	(1, 1, 0, 1, 0, 1, 1): 5,
-	(1, 1, 0, 1, 1, 1, 1): 6,
-	(1, 0, 1, 0, 0, 1, 0): 7,
-	(1, 1, 1, 1, 1, 1, 1): 8,
-	(1, 1, 1, 1, 0, 1, 1): 9
+    (0, 0, 1, 0, 0, 1, 0): 1,
+    (1, 0, 1, 1, 1, 0, 1): 2,
+    (1, 0, 1, 1, 0, 1, 1): 3,
+    (0, 1, 1, 1, 0, 1, 0): 4,
+    (1, 1, 0, 1, 0, 1, 1): 5,
+    (1, 1, 0, 1, 1, 1, 1): 6,
+    (1, 0, 1, 0, 0, 1, 0): 7,
+    (1, 1, 1, 1, 1, 1, 1): 8,
+    (1, 1, 1, 1, 0, 1, 1): 9
 }
 
 RIGHT_SYMBOLS = {
-	(0, 1): 10,
-	(1, 0): 2,
-	(0, 0): 1
+    (0, 1): 10,
+    (1, 0): 2,
+    (0, 0): 1
 }
 
 moves = {
-	(0, 0, 1, 1, 2, 2): ['enter', 'return', 'enter', 'return', 'enter', 'return'], # (1-1) + (2-2) + (3-3)
-	(0, 0, 1, 2, 2, 1): ['enter', 'return', 'enter', 's', 'return', 'enter', 'return'], # (1-1) + (2-3) + (3-2)
-	(0, 1, 1, 0, 2, 2): ['enter', 's', 'return', 'enter', 'w', 'return', 'enter', 'return'], #(1-2) + (2-1) + (3-3)
-	(0, 1, 1, 2, 2, 0): ['enter', 's', 'return', 'enter', 'return', 'enter', 'return'], # (1-2) + (2-3) + (3-1)
-	(0, 2, 1, 0, 2, 1): ['enter', 'w', 'return', 'enter', 'w', 'return', 'enter', 'return'], # (1-3) + (2-1) + (3-2)
-	(0, 2, 1, 1, 2, 0): ['enter', 'w', 'return', 'enter', 'return', 'enter', 'return'] # (1-3) + (2-2) + (3-1) 
+    (0, 0, 1, 1, 2, 2): ['enter', 'return', 'enter', 'return', 'enter', 'return'], # (1-1) + (2-2) + (3-3)
+    (0, 0, 1, 2, 2, 1): ['enter', 'return', 'enter', 's', 'return', 'enter', 'return'], # (1-1) + (2-3) + (3-2)
+    (0, 1, 1, 0, 2, 2): ['enter', 's', 'return', 'enter', 'w', 'return', 'enter', 'return'], #(1-2) + (2-1) + (3-3)
+    (0, 1, 1, 2, 2, 0): ['enter', 's', 'return', 'enter', 'return', 'enter', 'return'], # (1-2) + (2-3) + (3-1)
+    (0, 2, 1, 0, 2, 1): ['enter', 'w', 'return', 'enter', 'w', 'return', 'enter', 'return'], # (1-3) + (2-1) + (3-2)
+    (0, 2, 1, 1, 2, 0): ['enter', 'w', 'return', 'enter', 'return', 'enter', 'return'] # (1-3) + (2-2) + (3-1) 
 }
 
 bbox = (0, 0, 1920, 1080)
@@ -53,70 +53,70 @@ rightsymbol_height_1 = [541, 513] # second symbol
 rightsymbol_height_2 = [775, 747] # third symbol
 
 def pixel_check(x, y, img, maximum, dictionary):
-	hints = []
+    hints = []
 
-	for i in range(0, maximum):
-		pixel = img[y[i]:y[i] + 1, x[i]:x[i] + 1]
+    for i in range(0, maximum):
+        pixel = img[y[i]:y[i] + 1, x[i]:x[i] + 1]
 
-		if np.mean(pixel):
-			hints.append(1)
-		else:
-			hints.append(0)
-			
-	return dictionary[tuple(hints)]
+        if np.mean(pixel):
+            hints.append(1)
+        else:
+            hints.append(0)
+            
+    return dictionary[tuple(hints)]
 
 def objective_number(img):
-	value = (100 * (pixel_check(objectivenumber_length_0, objectivenumber_height, img, 7, DIGITS_LOOKUP))) + (10 * (pixel_check(objectivenumber_length_1, objectivenumber_height, img, 7, DIGITS_LOOKUP))) + pixel_check(objectivenumber_length_2, objectivenumber_height, img, 7, DIGITS_LOOKUP)
-	return value
+    value = (100 * (pixel_check(objectivenumber_length_0, objectivenumber_height, img, 7, DIGITS_LOOKUP))) + (10 * (pixel_check(objectivenumber_length_1, objectivenumber_height, img, 7, DIGITS_LOOKUP))) + pixel_check(objectivenumber_length_2, objectivenumber_height, img, 7, DIGITS_LOOKUP)
+    return value
 
 def left_numbers(img):
-	values = []
-	values.append(pixel_check(leftnumber_length, leftnumber_height_0, img, 7, DIGITS_LOOKUP))
-	values.append(pixel_check(leftnumber_length, leftnumber_height_1, img, 7, DIGITS_LOOKUP))
-	values.append(pixel_check(leftnumber_length, leftnumber_height_2, img, 7, DIGITS_LOOKUP))
+    values = []
+    values.append(pixel_check(leftnumber_length, leftnumber_height_0, img, 7, DIGITS_LOOKUP))
+    values.append(pixel_check(leftnumber_length, leftnumber_height_1, img, 7, DIGITS_LOOKUP))
+    values.append(pixel_check(leftnumber_length, leftnumber_height_2, img, 7, DIGITS_LOOKUP))
 
-	return values
+    return values
 
 def right_symbols(img):
-	values = []
-	values.append(pixel_check(rightsymbol_length, rightsymbol_height_0, img, 2, RIGHT_SYMBOLS))
-	values.append(pixel_check(rightsymbol_length, rightsymbol_height_1, img, 2, RIGHT_SYMBOLS))
-	values.append(pixel_check(rightsymbol_length, rightsymbol_height_2, img, 2, RIGHT_SYMBOLS))
+    values = []
+    values.append(pixel_check(rightsymbol_length, rightsymbol_height_0, img, 2, RIGHT_SYMBOLS))
+    values.append(pixel_check(rightsymbol_length, rightsymbol_height_1, img, 2, RIGHT_SYMBOLS))
+    values.append(pixel_check(rightsymbol_length, rightsymbol_height_2, img, 2, RIGHT_SYMBOLS))
 
-	return values
+    return values
 
 def calculate(a, b, c):
-	try:
-		for i in range(0, 6):
-			keys = []
-			keys.append(list(tuple(moves)[i]))
+    try:
+        for i in range(0, 6):
+            keys = []
+            keys.append(list(tuple(moves)[i]))
 
-			for z, x, v, n, k, l in keys:
-				if (a == b[z] * c[x] + b[v] * c[n] + b[k] * c[l]):
-					print('-', moves[tuple(moves)[i]])
-					for key in (moves[tuple(moves)[i]]):
-						keyboard.press_and_release(key)
-						if key == 's' or 'w' or 'enter':
-							time.sleep(0.025)
-						if key == 'return':
-							time.sleep(1.3)
-					raise NotImplementedError
-	except:
-		print('[*] END')
-		print('=============================================')
+            for z, x, v, n, k, l in keys:
+                if (a == b[z] * c[x] + b[v] * c[n] + b[k] * c[l]):
+                    print('-', moves[tuple(moves)[i]])
+                    for key in (moves[tuple(moves)[i]]):
+                        keyboard.press_and_release(key)
+                        if key == 's' or 'w' or 'enter':
+                            time.sleep(0.025)
+                        if key == 'return':
+                            time.sleep(1.3)
+                    raise NotImplementedError
+    except:
+        print('[*] END')
+        print('=============================================')
 
 def main():
-	print('[*] Cayo Voltage Hack')
+    print('[*] Cayo Voltage Hack')
 
-	im = ImageGrab.grab(bbox)
+    im = ImageGrab.grab(bbox)
 
-	grayImage = cv2.cvtColor(np.array(im), cv2.COLOR_RGB2GRAY)
-	(thresh, blackAndWhiteImage) = cv2.threshold(grayImage, 127, 255, cv2.THRESH_BINARY)
+    grayImage = cv2.cvtColor(np.array(im), cv2.COLOR_RGB2GRAY)
+    (thresh, blackAndWhiteImage) = cv2.threshold(grayImage, 127, 255, cv2.THRESH_BINARY)
 
-	objectivenumber = objective_number(blackAndWhiteImage)
-	leftnumbers = left_numbers(blackAndWhiteImage)
-	rightnumbers = right_symbols(blackAndWhiteImage)
+    objectivenumber = objective_number(blackAndWhiteImage)
+    leftnumbers = left_numbers(blackAndWhiteImage)
+    rightnumbers = right_symbols(blackAndWhiteImage)
 
-	print('- ', objectivenumber, leftnumbers, rightnumbers)
+    print('- ', objectivenumber, leftnumbers, rightnumbers)
 
-	calculate(objectivenumber, leftnumbers, rightnumbers)
+    calculate(objectivenumber, leftnumbers, rightnumbers)

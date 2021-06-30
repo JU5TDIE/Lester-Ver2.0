@@ -17,56 +17,56 @@ def PrintBanner():
                                                                                           ''')
 
 def PrintCredits():
-	print('''
+    print('''
 Made by JUSTDIE
 Special thanks to RedHeadEmile
-	''')																					
-	
+    ''')																					
+    
 def check_window():
-	print('[*] Searching Grand Theft Auto V...')
+    print('[*] Searching Grand Theft Auto V...')
 
-	while True:
-		hwnd = win32gui.FindWindow(None, "Grand Theft Auto V")
-		
-		if hwnd:
-			print('[*] Grand Theft Auto V Detected!')
-			print('')
-			print('=============================================')
-			return True
-		
-		time.sleep(1)
+    while True:
+        hwnd = win32gui.FindWindow(None, "Grand Theft Auto V")
+        
+        if hwnd:
+            print('[*] Grand Theft Auto V Detected!')
+            print('')
+            print('=============================================')
+            return True
+        
+        time.sleep(1)
 
 def casino_fingerprint():
-	thread = Thread(target = casinofingerprint.main)
-	thread.start()
+    thread = Thread(target = casinofingerprint.main)
+    thread.start()
 
 def casino_keypad():
-	thread = Thread(target = casinokeypad.main)
-	thread.start()
+    thread = Thread(target = casinokeypad.main)
+    thread.start()
 
 def cayo_fingerprint():
-	thread = Thread(target = cayofingerprint.main)
-	thread.start()
+    thread = Thread(target = cayofingerprint.main)
+    thread.start()
 
 def cayo_voltage():
-	thread = Thread(target = cayovoltage.main)
-	thread.start()
+    thread = Thread(target = cayovoltage.main)
+    thread.start()
 
 def shutdown():
-	sys.exit()
+    sys.exit()
 
 def main():
-	PrintBanner()
-	PrintCredits()
+    PrintBanner()
+    PrintCredits()
 
-	if check_window():
-		with pynput.keyboard.GlobalHotKeys({
-				'<F4>': shutdown,
+    if check_window():
+        with pynput.keyboard.GlobalHotKeys({
+                '<F4>': shutdown,
                 '<F5>': casino_fingerprint,
                 '<F6>': casino_keypad,
                 '<F7>': cayo_fingerprint,
                 '<F8>': cayo_voltage}) as h:
-			h.join()
+            h.join()
 
 if __name__ == "__main__":
-	main()
+    main()

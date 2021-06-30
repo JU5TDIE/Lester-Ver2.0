@@ -26,45 +26,45 @@ scan = [(424, 360, 810, 415), # every parts on the left
 
 
 def index(part, parts):
-	"""Return the index of 'part' in 'parts', return -1 if not found"""
-	for i in range(len(parts)):
-		res = cv2.matchTemplate(parts[i], part, cv2.TM_CCOEFF_NORMED)
-		loc = np.where(res >= 0.65)
-		for pt in zip(*loc[::-1]):
-			return i
-	return -1
+    """Return the index of 'part' in 'parts', return -1 if not found"""
+    for i in range(len(parts)):
+        res = cv2.matchTemplate(parts[i], part, cv2.TM_CCOEFF_NORMED)
+        loc = np.where(res >= 0.65)
+        for pt in zip(*loc[::-1]):
+            return i
+    return -1
 
 def main():
-	print('[*] Cayo Perico Fingerprint')
-	im = ImageGrab.grab(bbox)
+    print('[*] Cayo Perico Fingerprint')
+    im = ImageGrab.grab(bbox)
 
-	parts = []
-	for target in targets:
-		part = im.crop(target)
-		# resize the big part and store it
-		parts.append(cv2.cvtColor(np.array(part.resize((round(part.size[0] * 0.91), round(part.size[1] * 0.91)))), cv2.COLOR_BGR2GRAY))
+    parts = []
+    for target in targets:
+        part = im.crop(target)
+        # resize the big part and store it
+        parts.append(cv2.cvtColor(np.array(part.resize((round(part.size[0] * 0.91), round(part.size[1] * 0.91)))), cv2.COLOR_BGR2GRAY))
 
-	moves = []
-	for i in range(len(scan)):
-		# get the index of the litle part on  the left
-		j = index(cv2.cvtColor(np.array(im.crop(scan[i])), cv2.COLOR_BGR2GRAY), parts)
+    moves = []
+    for i in range(len(scan)):
+        # get the index of the litle part on  the left
+        j = index(cv2.cvtColor(np.array(im.crop(scan[i])), cv2.COLOR_BGR2GRAY), parts)
 
-		path = min(i - j, i - j - 8, i - j + 8, key = abs)
-		if path != 0:
-			key = "d" if path > 0 else "a"
-			for i in range(abs(path)):
-				moves.append(key)
+        path = min(i - j, i - j - 8, i - j + 8, key = abs)
+        if path != 0:
+            key = "d" if path > 0 else "a"
+            for i in range(abs(path)):
+                moves.append(key)
 
-		moves.append("s")
+        moves.append("s")
 
-	while moves[-1] == "S":
-		del moves[-1]
+    while moves[-1] == "S":
+        del moves[-1]
 
-	print('-', moves)
-	
-	for key in moves:
-		keyboard.press_and_release(key)
-		time.sleep(0.025)
+    print('-', moves)
+    
+    for key in moves:
+        keyboard.press_and_release(key)
+        time.sleep(0.025)
 
-	print('[*] END')
-	print('=============================================')
+    print('[*] END')
+    print('=============================================')
