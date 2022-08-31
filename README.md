@@ -1,10 +1,9 @@
 # Lester-VER2.0
 GTA Online Heist Hacking(Minigame) Macro
 
-The Source Codes of `Fingerprint Scanner` and `Retro Fingerprint Scanner` are from [HERE](https://github.com/RedHeadEmile/GTA-V-Heist-Help)
+Special thanks to [RedHeadEmile](https://github.com/RedHeadEmile/GTA-V-Heist-Help) for `Fingerprint Scanner` and `Retro Fingerprint Scanner`
 
-# Features
-- CLI
+# How To Use
 - Press `F4` for `Exit`
 - Press `F5` for `Fingerprint Scanner`
 - Press `F6` for `Keypad Cracker`
@@ -16,19 +15,8 @@ The Source Codes of `Fingerprint Scanner` and `Retro Fingerprint Scanner` are fr
 - Install the requirements `pip install -r requirements.txt`
 - Run `python main.py`
 
-# Used Modules
-- `time`
-- `threading`
-- `opencv-python`
-- `keyboard`
-- `numpy`
-- `Pillow`
-- `pynput`
-- `win32gui`
-
 # Warning
-- `Python 3.8` is recommended version for this repository
-- If there are some issues or suggestions, write them on `Issues`
+- `Python 3.8` is recommended python version for this repository
 - You must use `1920x1080` resolution, otherwise the script would make some errors.
 - On `Keypad Cracker`, you have to press `F6` on the latest pattern
 
