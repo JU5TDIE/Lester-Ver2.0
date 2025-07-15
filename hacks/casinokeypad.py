@@ -12,8 +12,8 @@ DIGITS_LOOKUP = {
     (0, 0, 0, 0, 1): 5
 }
 
-height = [2, 110, 218, 326, 434]
-length = [50, 158, 266, 374, 482, 590]
+height = [41, 149, 257, 365, 473]
+length = [44, 152, 260, 368, 476, 584]
 
 tofind = (454, 300, 1080, 830)
 
@@ -21,9 +21,9 @@ def dot_check(a, img):
     hint = []
 
     for i in range(0, 5):
-        crop_img = img[height[i]:height[i] + 1, length[a]:length[a] + 1]
+        crop_img = img[height[i] - 20:height[i] + 20, length[a] - 20:length[a] + 20]
 
-        if np.mean(crop_img) == 255:
+        if np.mean(crop_img) > 125:
             hint.append(1)
         else:
             hint.append(0)
@@ -104,7 +104,7 @@ def main(bbox):
     mintimg = cv2.bitwise_and(np.array(im), np.array(im), mask= mask)
 
     grayImage = cv2.cvtColor(mintimg, cv2.COLOR_RGB2GRAY)
-    (thresh, blackAndWhiteImage) = cv2.threshold(grayImage, 215, 255, cv2.THRESH_BINARY)
+    (thresh, blackAndWhiteImage) = cv2.threshold(grayImage, 100, 255, cv2.THRESH_BINARY)
 
     try:
         numbers = []
